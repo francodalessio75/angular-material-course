@@ -1,5 +1,15 @@
 <div [formGroup]="form" class="course-details-form">
-
+<mat-form-field floatLabel="auto">
+  <input matInput placeholder="Course title" formControlName="title">
+  <span matPrefix>+32</span>
+  <span matSuffix>+32</span>
+</mat-form-field>
+<!-- <mat-form-field appearance="fill">
+  <input matInput placeholder="Course title" formControlName="title">
+</mat-form-field> -->
+<!--<mat-form-field appearance="outline">
+  <input matInput placeholder="Course title" formControlName="title">
+</mat-form-field> -->
 
 </div>
 
