@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
+import { MatCalendarCellClassFunction, MatCalendarCellCssClasses } from '@angular/material/datepicker';
 
+const SAMPLE_TEXT = 'Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo prese una cassetta di caratteri e li assemblò per preparare un testo campione. È sopravvissuto non solo a più di cinque secoli, ma anche al passaggio alla videoimpaginazione, pervenendoci sostanzialmente inalterato. Fu reso popolare, negli anni ’60, con la diffusione dei fogli di caratteri trasferibili “Letraset”, che contenevano passaggi del Lorem Ipsum, e più recentemente da software di impaginazione come Aldus PageMaker, che includeva versioni del Lorem Ipsum.'
 
 @Component({
   selector: "create-course-step-1",
@@ -15,12 +17,21 @@ export class CreateCourseStep1Component {
       Validators.minLength(5),
       Validators.maxLength(60)
     ]],
-    releasedAt: [new Date(), Validators.required],
+    releasedAt: [new Date(1990,0,1), Validators.required],
     category: ['BEGINNER', Validators.required],
     courseType: ['premium', Validators.required],
     downloadsAllowed: [false, Validators.requiredTrue],
-    longDescription: ['', [Validators.required, Validators.minLength(3)]]
+    longDescription: [SAMPLE_TEXT, [Validators.required, Validators.minLength(3)]]
   });
+
+  dateClass:MatCalendarCellClassFunction<Date> = (cellDate, view) =>{
+    const date = cellDate.getDate();
+    if( view = 'month'){
+      return (date === 1 ) ? 'highlight-date' : "";
+    }
+
+    return "";
+  }
 
   constructor(private fb: FormBuilder) {
 

@@ -1,8 +1,64 @@
 <div [formGroup]="form" class="course-details-form">
 <mat-form-field floatLabel="auto">
-  <input matInput placeholder="Course title" formControlName="title">
-  <span matPrefix>+32</span>
-  <span matSuffix>+32</span>
+  <input matInput placeholder="Course title" formControlName="title" #title>
+  <mat-hint align="end">
+    {{title.value.length}} / 60
+  </mat-hint>
+  <mat-error *ngIf="courseTitle.errors?.minlength">
+    A minimum length of 5 characters is expected
+  </mat-error>
+  <!-- <span matPrefix>+32</span>
+  <span matSuffix>.00</span> -->
+</mat-form-field>
+<mat-radio-group class="course-type" formControlName="courseType">
+  <mat-radio-button [disabled]="true" value="free">Free</mat-radio-button>
+  <mat-radio-button value="premium">Premium</mat-radio-button>
+</mat-radio-group>
+<mat-form-field appearance="fill">
+  <mat-select
+    formControlName="category"
+    placeholder="Select Category"
+    >
+
+    <mat-option>None</mat-option>
+
+    <mat-optgroup label="Beginnners">
+      <mat-option value="newprogramming">New To Programming</mat-option>
+      <mat-option value="newjavascript">New To Javascript</mat-option>
+      <mat-option value="newangular">New To Angular</mat-option>
+    </mat-optgroup>
+    <mat-option value="intermediate">Intermediate</mat-option>
+    <mat-option value="advanced">Advanced</mat-option>
+
+  </mat-select>
+</mat-form-field>
+<mat-form-field apperance="ouline">
+  <input
+    matInput
+    formControlName="releasedAt"
+    placeholder="Release Date"
+    [matDatepicker]="releasedAtPicker">
+  <mat-datepicker-toggle matSuffix [for]="releasedAtPicker">
+  </mat-datepicker-toggle>
+  <mat-datepicker #releasedAtPicker [dateClass]="dateClass">
+  </mat-datepicker>
+</mat-form-field>
+<mat-checkbox
+  color="primary"
+  formControlName="downloadsAllowed"
+  [indeterminate]="true">
+  Downloads allowed?
+</mat-checkbox>
+<mat-form-field
+  appearance="outline">
+ <textarea
+    matInput
+    placeholder="Description"
+    formControlName="longDescription"
+    cdkTextareaAutosize
+    [cdkAutosizeMinRows]="2"
+    [cdkAutosizeMaxRows]="5"
+    ></textarea>
 </mat-form-field>
 <!-- <mat-form-field appearance="fill">
   <input matInput placeholder="Course title" formControlName="title">
